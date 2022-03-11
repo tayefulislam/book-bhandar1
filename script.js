@@ -91,7 +91,15 @@ const showBooks = (books) => {
   });
 };
 
+
+const checklength = (word) => {
+
+  return word.length <= 100 ? word : `${word.slice(0, 100)}...`
+}
+
 const createCard = (book) => {
+
+  console.log(book)
   const div = document.createElement("div");
   div.classList.add("card");
 
@@ -100,7 +108,7 @@ const createCard = (book) => {
   div.innerHTML = `
   <div class="image-container">
     <img
-      src="${book.Image}"
+      src="${book.image}"
       alt=""
     />
     <div class="button-container">
@@ -111,8 +119,8 @@ const createCard = (book) => {
   <div class="info-container">
     <h1>${book.name}</h1>
     <p>
-      ${overview}
-    </p>
+    ${checklength(overview)}
+  </p>
   </div>
 
 `;
