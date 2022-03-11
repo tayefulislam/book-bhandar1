@@ -151,10 +151,13 @@ const displayCart = () => {
 };
 
 const displayWishlist = () => {
+
+  document.getElementById("wishlist").innerHTML = ``
   const wishlist = getWishlistItems();
+
   console.log(wishlist);
 
-  bookList.forEach((book) => {
+  wishlist.forEach((book) => {
     const div = createCard(book);
     document.getElementById("wishlist").appendChild(div);
   });
