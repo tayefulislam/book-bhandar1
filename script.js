@@ -48,18 +48,20 @@ const bookList = [
 ];
 
 
-console.log(bookList)
+// console.log(bookList)
 
 
 const wishlistItems = [];
 const cart = [];
+console.log(cart)
 
 const getWishlistItems = () => {
   return bookList.filter((book) => wishlistItems.includes(book.id.toString()));
 };
 
 const getCartItems = () => {
-  return bookList.filter((book) => cart.includes(book.id.toString()));
+  console.log(bookList.filter((book) => cart.includes(book.id)))
+  return bookList.filter((book) => cart.includes(book.id));
 };
 
 const switchTab = (id) => {
@@ -94,12 +96,12 @@ const showBooks = (books) => {
 
 const checklength = (word) => {
 
-  return word.length <= 100 ? word : `${word.slice(0, 100)}...`
+  return word.length <= 70 ? word : `${word.slice(0, 70)}...`
 }
 
 const createCard = (book) => {
 
-  console.log(book)
+  // console.log(book)
   const div = document.createElement("div");
   div.classList.add("card");
 
@@ -113,7 +115,7 @@ const createCard = (book) => {
     />
     <div class="button-container">
       <button onclick="addToWishlist('${book.id}')" class="button"><i class="fa-solid fa-heart"></i></button>
-      <button onclick="AddToCart" class="button">Add To Cart</button>
+      <button onclick="addToCart(${book.id})" class="button">Add To Cart</button>
     </div>
   </div>
   <div class="info-container">
@@ -131,7 +133,14 @@ const createCard = (book) => {
 showBooks(bookList);
 
 const addToCart = (id) => {
-  cart.push(id);
+  // console.log(id)
+  // console.log(cart)
+  if (cart.indexOf(id) === -1) {
+    cart.push(id);
+    console.log(cart)
+  }
+
+
 };
 
 const addToWishlist = (id) => {
@@ -141,10 +150,13 @@ const addToWishlist = (id) => {
 };
 
 const displayCart = () => {
+
+  document.getElementById("cart").innerHTML = ``;
   const cart = getCartItems();
-  console.log(cart);
+  console.log(getCartItems());
 
   cart.forEach((book) => {
+    console.log(book)
     const div = createCard(book);
     document.getElementById("cart").appendChild(div);
   });
@@ -155,9 +167,10 @@ const displayWishlist = () => {
   document.getElementById("wishlist").innerHTML = ``
   const wishlist = getWishlistItems();
 
-  console.log(wishlist);
+  // console.log(wishlist);
 
   wishlist.forEach((book) => {
+    // console.log(book)
     const div = createCard(book);
     document.getElementById("wishlist").appendChild(div);
   });
